@@ -1,23 +1,100 @@
-* {
-    font-family: Verdana, Lucida Sans, Arial, Helvetica, sans-serif;
-}
-
+/* Colors from Learn Meditation 5 theme: https://color.adobe.com/es/Learn-Meditation-5-color-theme-1798650/ 
+* white: #FFFFFF (CHANGED TO #F0F0EC)
+* lightest-green: #EAFFD9
+* lighter-green: #B7E8BF
+* dark-green: #86D19E
+* darkest-green: #4FA87B
+*/
 body {
-    margin: 0px auto;
-    background-color:#222;
+	font-family: 'Arial';
+	font-weight: 100;
+	color: #FFFFFF;
 }
 
-.contents {
+.clock {
+	position: relative;
+	width: 360px;
+	height: 360px;
+	background-color: #000000;
+	border-radius: 50%;
+	overflow-x: hidden;
+}
+
+.container {
+	box-sizing: border-box;
 	display: flex;
 	display: -webkit-flex;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	height:320px;
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
+	flex-direction: -webkit-column;
+	align-items: center;
+	align-items: -webkit-center;
+	align-content: center;
+	align-content: -webkit-center;
+	justify-content: center;
+	justificy-content: -webkit-center;
 }
 
+.cryptoCurrency {
+	position: absolute;
+    top: 20px;
+    text-align: center;
+    width: 60%;
+}
 
-.content_text {
-	font-weight:bold;
-	font-size:5em;
-	color:#fff;
+#cryptoCurrencyImage {
+	display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    height: 64px;
+    width: 50%;
+}
+
+#cryptoCurrencySymbol {
+	display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    width: 50%;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.cryptoCurrencyEurChange {
+	width: 100%;
+    text-align: center;
+    font-size: 52px;
+    font-weight: bold;
+}
+
+.cryptoCurrencyMarketTrade {
+	width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 26px;
+}
+
+.cryptoCurrencyMarketEvolutionPercentage {
+	width: 100%;
+    text-align: center;
+}
+
+.percentages {
+	width: 100%;
+    font-size: 16px;
+}
+
+.cryptoCurrencyMarketCap {
+	width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 280px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.errorMessage {
+	width: 80%;
+    text-align: center;
+    font-size: 36px;
 }

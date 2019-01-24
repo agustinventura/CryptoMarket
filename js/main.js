@@ -2,62 +2,73 @@ var cryptoCurrencies = null;
 var cryptoCurrencyData = [];
 var cryptoCurrencyIndex = -1;
 
-window.onload = function() {
-    getTopFiveCryptoCurrencies();
-    // add eventListener for tizenhwkey
-    document.addEventListener('tizenhwkey', function(e) {
-        if (e.keyName === "back") {
-            try {
-                tizen.application.getCurrentApplication().exit();
-            } catch (ignore) {}
-        }
-    });
-
-    // Sample code
-    var textbox = document.querySelector('.contents');
-    textbox.addEventListener("click", function() {
+function getTopFiveCryptoCurrencies() {
+    $.ajax({
+        url: "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            start: 1,
+            limit: 5,
+            convert: "EUR"
+        },
+        beforeSend: setHeader
+    }).done(function(msg) {
+    	console.log(msg);
+        cryptoCurrencies = msg;
         getCryptoCurrencyInfo();
-        var box = document.querySelector('#textbox');
-        box.innerHTML = (box.innerHTML === "Basic") ? "Sample" : "Basic";
+    }).fail(function(jqXHR, textStatus, errorThrown){
+    	console.log(jqXHR);
+    	console.log(textStatus);
+    	console.log(errorThrown);
+    	//$("#cryptoScreen").hide();
+        //$("#errorScreen").show();
     });
+}
 
-    function getTopFiveCryptoCurrencies() {
-        $.ajax({
-            url: "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
-            type: 'GET',
-            dataType: 'json',
-            data: {
-                start: 1,
-                limit: 5,
-                convert: "EUR",
-                sort: "price"
-            },
-            beforeSend: setHeader
-        }).done(function(msg) {
-            cryptoCurrencies = msg;
-        });
-    }
+function getCryptoCurrencyInfo() {
+    incrementIndex();
+    loadCryptoCurrencyData();
+    showCryptoCurrencyData();
+}
 
-    function getCryptoCurrencyInfo() {
-        if (cryptoCurrencyIndex < 4) {
-            cryptoCurrencyIndex++;
-        } else {
-            cryptoCurrencyIndex = 0;
-        }
-        var cryptoCurrency = cryptoCurrencies["data"][cryptoCurrencyIndex];
-        if (cryptoCurrencyData.length - 1 < cryptoCurrencyIndex) {
-            loadCryptoCurrencyData(cryptoCurrency);
-        }
+function incrementIndex() {
+	if (cryptoCurrencyIndex < 4) {
+        cryptoCurrencyIndex++;
+    } else {
+        cryptoCurrencyIndex = 0;
     }
+}
 
-    function loadCryptoCurrencyData(cryptoCurrency) {
-        $.ajax({
-            url: "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/info?id=" + cryptoCurrency["id"],
-            type: 'GET',
-            dataType: 'json',
-            beforeSend: setHeader
-        }).done(function(msg) {
-            cryptoCurrencyData.push(msg);
-        });
+function loadCryptoCurrencyData() {
+	console.log(cryptoCurrencies);
+	var cryptoCurrency = cryptoCurrencies["data"][cryptoCurrencyIndex];
+    if (cryptoCurrencyData.length - 1 < cryptoCurrencyIndex) {
+        loadCryptoCurrencyDataFromAPI(cryptoCurrency);
     }
-};
+}
+
+function loadCryptoCurrencyDataFromAPI(cryptoCurrency) {
+    $.ajax({
+        url: "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/info?id=" + cryptoCurrency["id"],
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: setHeader
+    }).done(function(msg) {
+        cryptoCurrencyData.push(msg);
+    }).fail(showErrorScreen);
+}
+
+function showCryptoCurrencyData() {
+	$("#cryptoScreen").show();
+    $("#errorScreen").hide();
+}
+
+function init() {
+	getTopFiveCryptoCurrencies();
+	$(document).on('rotarydetent', getTopFiveCryptoCurrencies);
+	$(window).on('tizenhwkey', function(e) {
+		tizen.application.getCurrentApplication().exit();
+    });
+}
+$(document).ready(init);

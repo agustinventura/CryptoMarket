@@ -16,27 +16,33 @@
 <body>
     <div id="cryptoScreen" class="clock">
         <div class="container">
-            <div class="cryptoCurrency">
-                <span id="cryptoCurrencyImage"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"></span><span id="cryptoCurrencySymbol">BTC</span>
-            </div>
-            <div class="cryptoCurrencyEurChange">
-                <span id="cryptoCurrencyEur">3414.0007</span> €
-            </div>
-            <div class="cryptoCurrencyMarketTrade">
-                <span id="cryptoCurrencyPoints">5577556542.3412</span> € / 24h
-            </div>
-            <div class="cryptoCurrencyMarketEvolutionPercentage">
-            	<table class="percentages">
-            		<tr>
-            			<td><span id="cryptoCurrencyPercentage1h">0.4244</span>% / 1h</td>
-            			<td><span id="cryptoCurrencyPercentage24h">-4.2844</span>% / 24h</td>
-            			<td><span id="cryptoCurrencyPercentage7d">16.2984</span>% / 7d</td>
-            		</tr>
-            	</table>
-            </div>
-            <div class="cryptoCurrencyMarketCap">
-                <span id="totalMarketCap">59526216223.4875</span> €
-            </div>
+            <table class="data">
+                <tr>
+                    <td colspan="3">
+                    	<img id="cryptoCurrencyImage" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"><span id="cryptoCurrencySymbol">BTC</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                            <span id="cryptoCurrencyEur">3414.0007</span> €
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                            <span id="cryptoCurrencyPoints">5577556542.3412</span> € / 24h
+                    </td>
+                </tr>
+                <tr>
+                    <td><span id="cryptoCurrencyPercentage1h">0.4244</span>% / 1h</td>
+                    <td><span id="cryptoCurrencyPercentage24h">-4.2844</span>% / 24h</td>
+                    <td><span id="cryptoCurrencyPercentage7d">16.2984</span>% / 7d</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                            <span id="totalMarketCap">59526216223.4875</span> €
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div id="errorScreen" class="clock">
@@ -47,4 +53,5 @@
         </div>
     </div>
 </body>
+
 </html>

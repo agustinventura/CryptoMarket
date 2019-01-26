@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/currencyFormatter.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/setApiKey.js"></script>
 </head>
@@ -18,28 +19,28 @@
         <div class="container">
             <table class="data">
                 <tr>
-                    <td colspan="3">
+                    <td colspan="3" class="cryptoCurrencyIdentity">
                     	<img id="cryptoCurrencyImage" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"><span id="cryptoCurrencySymbol">BTC</span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
-                            <span id="cryptoCurrencyEur">3414.0007</span> €
+                    <td colspan="3" class="cryptoCurrencyValue">
+                            <span id="cryptoCurrencyEur">3414.0007</span>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="3">
-                            <span id="cryptoCurrencyPoints">5577556542.3412</span> € / 24h
-                    </td>
-                </tr>
-                <tr>
+                <tr class="cryptoCurrencyMarketEvolution">
                     <td><span id="cryptoCurrencyPercentage1h">0.4244</span>% / 1h</td>
                     <td><span id="cryptoCurrencyPercentage24h">-4.2844</span>% / 24h</td>
                     <td><span id="cryptoCurrencyPercentage7d">16.2984</span>% / 7d</td>
                 </tr>
                 <tr>
+                    <td colspan="3" class="cryptoCurrencyTrade">
+                            <span id="cryptoCurrencyPoints">5577556542.3412</span> / 24h
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="3">
-                            <span id="totalMarketCap">59526216223.4875</span> €
+                            <span id="totalMarketCap">59526216223.4875</span> 
                     </td>
                 </tr>
             </table>

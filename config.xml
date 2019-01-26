@@ -7,4 +7,5 @@
     <name>CryptoMarket</name>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>
     <tizen:profile name="wearable"/>
+    <access origin="*" subdomains="true"/>
 </widget>

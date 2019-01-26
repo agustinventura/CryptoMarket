@@ -64,12 +64,15 @@ function showCryptoCurrencyData() {
     $("#errorScreen").hide();
     $("#cryptoCurrencyImage").attr("src", cryptoCurrencyData[cryptoCurrencyIndex][selectedCryptoCurrency.id].logo);
     $("#cryptoCurrencySymbol").text(cryptoCurrencyData[cryptoCurrencyIndex][selectedCryptoCurrency.id].symbol);
-    $("#cryptoCurrencyEur").text(selectedCryptoCurrency.quote.EUR.price);
-    $("cryptoCurrencyPoints").text(selectedCryptoCurrency.quote.EUR.volume_24h);
-    $("cryptoCurrencyPercentage1h").text(selectedCryptoCurrency.quote.EUR.percent_change_1h);
-    $("cryptoCurrencyPercentage24h").text(selectedCryptoCurrency.quote.EUR.percent_change_24h);
-    $("cryptoCurrencyPercentage7d").text(selectedCryptoCurrency.quote.EUR.percent_change_7d);
-    $("totalMarketCap").text(selectedCryptoCurrency.quote.EUR.market_cap);
+    var eurChange = selectedCryptoCurrency.quote.EUR.price;
+    $("#cryptoCurrencyEur").text(OSREC.CurrencyFormatter.format(eurChange, { currency: 'EUR' }));
+    var eurVolume = selectedCryptoCurrency.quote.EUR.volume_24h;
+    $("#cryptoCurrencyPoints").text(OSREC.CurrencyFormatter.format(eurVolume, { currency: 'EUR' }));
+    $("#cryptoCurrencyPercentage1h").text(selectedCryptoCurrency.quote.EUR.percent_change_1h);
+    $("#cryptoCurrencyPercentage24h").text(selectedCryptoCurrency.quote.EUR.percent_change_24h);
+    $("#cryptoCurrencyPercentage7d").text(selectedCryptoCurrency.quote.EUR.percent_change_7d);
+    var eurMarketCap = selectedCryptoCurrency.quote.EUR.market_cap;
+    $("#totalMarketCap").text(OSREC.CurrencyFormatter.format(eurMarketCap, { currency: 'EUR' }));
 }
 
 function init() {

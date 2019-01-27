@@ -34,7 +34,7 @@ body {
 	heigth: 100%;
     text-align: center;
     position: absolute;
-    top: 0px;
+    top: 5px;
 }
 
 .cryptoCurrencyIdentity {
@@ -60,6 +60,7 @@ td.cryptoCurrencyIdentity > * {
 .cryptoCurrencyTrade {
 	font-size: 28px;
 	padding: 10px 0px;
+	font-weight: bold;
 }
 
 .cryptoCurrencyMarketEvolution > td {
@@ -67,8 +68,20 @@ td.cryptoCurrencyIdentity > * {
 	font-size: 18px;
 }
 
+.red {
+	color: #A00E0E;
+}
+
+.green {
+	color: #00BA35;
+}
+
+.totalMarketCap {
+	padding-top: 15px;	
+}
+
 #totalMarketCap {
-	font-size: 28px;	
+	font-size: 32px;	
 }
 
 .errorMessage {

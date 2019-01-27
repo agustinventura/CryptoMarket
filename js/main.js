@@ -1,11 +1,11 @@
 var cryptoCurrencies = null;
-var cryptoCurrencyData = [];
-var cryptoCurrencyIndex = -1;
+var cryptoCurrencyData = new Array(5);
+var cryptoCurrencyIndex = 0;
 var selectedCryptoCurrency = null;
 
 function getTopFiveCryptoCurrencies() {
     $.ajax({
-        url: "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+        url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
         type: 'GET',
         dataType: 'json',
         data: {
@@ -16,7 +16,8 @@ function getTopFiveCryptoCurrencies() {
         beforeSend: setHeader
     }).done(function(msg) {
         cryptoCurrencies = msg;
-        getCryptoCurrencyInfo();
+        $(document).on('rotarydetent', getCryptoCurrencyInfo);
+        loadCryptoCurrencyData();
     }).fail(showErrorScreen);
 }
 
@@ -25,8 +26,13 @@ function showErrorScreen() {
     $("#errorScreen").show();
 }
 
-function getCryptoCurrencyInfo() {
-    incrementIndex();
+function getCryptoCurrencyInfo(ev) {
+	var direction = ev.detail.direction;
+    if (direction === "CW") {
+    	incrementIndex();
+    } else {
+        decreaseIndex();
+    }
     loadCryptoCurrencyData();
 }
 
@@ -38,9 +44,17 @@ function incrementIndex() {
     }
 }
 
+function decreaseIndex() {
+	if (cryptoCurrencyIndex > 0) {
+        cryptoCurrencyIndex--;
+    } else {
+        cryptoCurrencyIndex = 4;
+    }
+}
+
 function loadCryptoCurrencyData() {
 	selectedCryptoCurrency = cryptoCurrencies["data"][cryptoCurrencyIndex];
-    if (cryptoCurrencyData.length - 1 < cryptoCurrencyIndex) {
+    if (cryptoCurrencyData[cryptoCurrencyIndex] == null) {
         loadCryptoCurrencyDataFromAPI();
     } else {
     	showCryptoCurrencyData();
@@ -49,12 +63,12 @@ function loadCryptoCurrencyData() {
 
 function loadCryptoCurrencyDataFromAPI() {
     $.ajax({
-        url: "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/info?id=" + selectedCryptoCurrency["id"],
+        url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?id=" + selectedCryptoCurrency["id"],
         type: 'GET',
         dataType: 'json',
         beforeSend: setHeader
     }).done(function(msg) {
-        cryptoCurrencyData.push(msg["data"]);
+    	cryptoCurrencyData[cryptoCurrencyIndex] = msg["data"];
         showCryptoCurrencyData();
     }).fail(showErrorScreen);
 }
@@ -66,18 +80,36 @@ function showCryptoCurrencyData() {
     $("#cryptoCurrencySymbol").text(cryptoCurrencyData[cryptoCurrencyIndex][selectedCryptoCurrency.id].symbol);
     var eurChange = selectedCryptoCurrency.quote.EUR.price;
     $("#cryptoCurrencyEur").text(OSREC.CurrencyFormatter.format(eurChange, { currency: 'EUR' }));
+    var percentage1h = selectedCryptoCurrency.quote.EUR.percent_change_1h;
+    $("#cryptoCurrencyPercentage1h").text(percentage1h);
+    if (percentage1h < 0) {
+    	$("#cryptoCurrencyPercentage1h").parent().addClass("red");
+    } else {
+    	$("#cryptoCurrencyPercentage1h").parent().addClass("green");
+    }
+    var percentage24h = selectedCryptoCurrency.quote.EUR.percent_change_24h;
+    $("#cryptoCurrencyPercentage24h").text(percentage24h);
+    if (percentage24h < 0) {
+    	$("#cryptoCurrencyPercentage24h").parent().addClass("red");
+    } else {
+    	$("#cryptoCurrencyPercentage24h").parent().addClass("green");
+    }
+    var percentage7d = selectedCryptoCurrency.quote.EUR.percent_change_7d;
+    $("#cryptoCurrencyPercentage7d").text(percentage7d);
+    if (percentage7d < 0) {
+    	$("#cryptoCurrencyPercentage7d").parent().addClass("red");
+    } else {
+    	$("#cryptoCurrencyPercentage7d").parent().addClass("green");
+    }
     var eurVolume = selectedCryptoCurrency.quote.EUR.volume_24h;
     $("#cryptoCurrencyPoints").text(OSREC.CurrencyFormatter.format(eurVolume, { currency: 'EUR' }));
-    $("#cryptoCurrencyPercentage1h").text(selectedCryptoCurrency.quote.EUR.percent_change_1h);
-    $("#cryptoCurrencyPercentage24h").text(selectedCryptoCurrency.quote.EUR.percent_change_24h);
-    $("#cryptoCurrencyPercentage7d").text(selectedCryptoCurrency.quote.EUR.percent_change_7d);
+    var percentage1h = selectedCryptoCurrency.quote.EUR.percent_change_1h;
     var eurMarketCap = selectedCryptoCurrency.quote.EUR.market_cap;
     $("#totalMarketCap").text(OSREC.CurrencyFormatter.format(eurMarketCap, { currency: 'EUR' }));
 }
 
 function init() {
 	getTopFiveCryptoCurrencies();
-	$(document).on('rotarydetent', getCryptoCurrencyInfo);
 	$(window).on('tizenhwkey', function(e) {
 		tizen.application.getCurrentApplication().exit();
     });

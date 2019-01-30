@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/CryptoMarket" version="1.0.0" viewmodes="maximized">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://www.digitalsingular.com/CryptoMarket" version="1.0.0" viewmodes="maximized">
+    <access origin="*" subdomains="true"></access>
     <tizen:application id="2y9zTbYpmH.CryptoMarket" package="2y9zTbYpmH" required_version="2.3.2"/>
+    <author href="http://www.digitalsingular.com" email="agustinventura@gmail.com">Agustín Ventura Carrasco</author>
     <content src="index.html"/>
+    <description xml:lang="es-es">CryptoMarket te permite consultar en tiempo real la cotización de las cinco criptomonedas con mayor mercado.</description>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="icon.png"/>
     <name>CryptoMarket</name>
+    <name xml:lang="es-es">CryptoMarket</name>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>
     <tizen:profile name="wearable"/>
-    <access origin="*" subdomains="true"/>
 </widget>

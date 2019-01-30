@@ -56,13 +56,14 @@
      inkscape:label="Capa 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <ellipse
-       style="fill:#e3e3e3;fill-opacity:1;stroke:#ffffff;stroke-width:3.44309092;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+    <circle
+       style="fill:#e3e3e3;fill-opacity:1;stroke:#ffffff;stroke-width:3.4498632;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path5074"
        cx="128"
-       cy="129.5"
-       rx="125.75434"
-       ry="125.25434" />
+       cy="129"
+       r="125.75095"
+       inkscape:export-xdpi="64.0121"
+       inkscape:export-ydpi="64.0121" />
     <path
        style="fill:none;stroke:#e8a2a2;stroke-width:1.88976378;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 4,131.5 c 3,0 21,-7.5 21,-7.5 l 51,-93.5 60,207 60.5,-159.5 54,54.5"

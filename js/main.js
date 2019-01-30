@@ -1,5 +1,4 @@
 var cryptoCurrencies = null;
-var cryptoCurrencyData = new Array(5);
 var cryptoCurrencyIndex = 0;
 var selectedCryptoCurrency = null;
 
@@ -54,34 +53,18 @@ function decreaseIndex() {
 
 function loadCryptoCurrencyData() {
 	selectedCryptoCurrency = cryptoCurrencies["data"][cryptoCurrencyIndex];
-    if (cryptoCurrencyData[cryptoCurrencyIndex] == null) {
-        loadCryptoCurrencyDataFromAPI();
-    } else {
-    	showCryptoCurrencyData();
-    }
-}
-
-function loadCryptoCurrencyDataFromAPI() {
-    $.ajax({
-        url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?id=" + selectedCryptoCurrency["id"],
-        type: 'GET',
-        dataType: 'json',
-        beforeSend: setHeader
-    }).done(function(msg) {
-    	cryptoCurrencyData[cryptoCurrencyIndex] = msg["data"];
-        showCryptoCurrencyData();
-    }).fail(showErrorScreen);
+    showCryptoCurrencyData();
 }
 
 function showCryptoCurrencyData() {
 	$("#cryptoScreen").show();
     $("#errorScreen").hide();
-    $("#cryptoCurrencyImage").attr("src", cryptoCurrencyData[cryptoCurrencyIndex][selectedCryptoCurrency.id].logo);
-    $("#cryptoCurrencySymbol").text(cryptoCurrencyData[cryptoCurrencyIndex][selectedCryptoCurrency.id].symbol);
+    $("#cryptoCurrencySymbol").text(selectedCryptoCurrency.symbol);
     var eurChange = selectedCryptoCurrency.quote.EUR.price;
     $("#cryptoCurrencyEur").text(OSREC.CurrencyFormatter.format(eurChange, { currency: 'EUR' }));
     var percentage1h = selectedCryptoCurrency.quote.EUR.percent_change_1h;
     $("#cryptoCurrencyPercentage1h").text(percentage1h);
+    $("#cryptoCurrencyPercentage1h").parent().removeClass();
     if (percentage1h < 0) {
     	$("#cryptoCurrencyPercentage1h").parent().addClass("red");
     } else {
@@ -89,6 +72,7 @@ function showCryptoCurrencyData() {
     }
     var percentage24h = selectedCryptoCurrency.quote.EUR.percent_change_24h;
     $("#cryptoCurrencyPercentage24h").text(percentage24h);
+    $("#cryptoCurrencyPercentage24h").parent().removeClass();
     if (percentage24h < 0) {
     	$("#cryptoCurrencyPercentage24h").parent().addClass("red");
     } else {
@@ -96,6 +80,7 @@ function showCryptoCurrencyData() {
     }
     var percentage7d = selectedCryptoCurrency.quote.EUR.percent_change_7d;
     $("#cryptoCurrencyPercentage7d").text(percentage7d);
+    $("#cryptoCurrencyPercentage7d").parent().removeClass();
     if (percentage7d < 0) {
     	$("#cryptoCurrencyPercentage7d").parent().addClass("red");
     } else {
